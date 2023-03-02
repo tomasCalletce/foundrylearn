@@ -21,4 +21,15 @@ contract CounterTest is Test {
         counter.setNumber(x);
         assertEq(counter.number(), x);
     }
+
+    function testFailSubtracttToNegative() public {
+        counter.decrement();
+    }
+
+    function testCannotSubtractToNegativeNumber() public {
+        vm.expectRevert(stdError.arithmeticError);
+        counter.decrement();
+    }
 }
+
+
