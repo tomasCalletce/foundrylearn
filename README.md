@@ -1,3 +1,3 @@
 # foundrylearn
 
-see ./test for the guide to some foundry functionality
+see ./test for the guide to some of foundry functionality
