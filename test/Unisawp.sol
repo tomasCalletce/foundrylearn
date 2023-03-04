@@ -14,6 +14,8 @@ import "forge-std/console.sol";
       and efficiently interact with Uniswap V2.
    */
 import { IUniswapV2Router02 } from "v2-periphery/interfaces/IUniswapV2Router02.sol";
+import { IERC20 } from "openzeppelin-contracts/token/ERC20/IERC20.sol";
+import { IWETH9 } from "custom/IWETH9.sol";
 
 contract Unisawp is Test {
 
@@ -38,5 +40,29 @@ contract Unisawp is Test {
         assertEq(uniswapV2Factory, UniswapV2Factory);
     }
 
+    function testUniSawp() public {
+        vm.selectFork(mainnetFork);
+
+        uint _amountIn = 10 ether;
+
+        IWETH9 weth = IWETH9(UniswapV2Router02.WETH());
+        IERC20 usdc = IERC20(0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48);
+
+        weth.deposit{ value: _amountIn}();
+        weth.approve(address(UniswapV2Router02), _amountIn);
+
+        address _tokenIn = address(weth);
+        address _tokenOut = address(usdc);
+
+        address[] memory path = new address[](2);
+        path[0] = _tokenIn;
+        path[1] = _tokenOut;
+
+        console.log(usdc.balanceOf(address(this)));
+
+        UniswapV2Router02.swapExactTokensForTokens(_amountIn,1,path,address(this),block.timestamp);
+
+        console.log(usdc.balanceOf(address(this)));
+    }
 
 }
