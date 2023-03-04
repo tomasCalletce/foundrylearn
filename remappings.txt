@@ -3,3 +3,4 @@ forge-std/=lib/forge-std/src/
 solmate/=lib/solmate/src/
 openzeppelin-contracts/=lib/openzeppelin-contracts/contracts/
 custom/=lib/custom/
+v2-periphery/=lib/v2-periphery/contracts/
